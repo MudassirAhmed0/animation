@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="seeMagic" class="relative min-h-[350vh]">
+      <video
+        src="./bannerVideo.mp4"
+        autoplay
+        loop
+        muted
+        playsinline
+        class="w-full object-cover sticky h-[100vh] top-0 left-0"
+      ></video>
+      <h1
+        id="magicHeading"
+        class="bg-black font-[Roboto] mix-blend-multiply font-[900] tracking-[0.2vw] w-full h-[100vh] flex items-center justify-center text-[5vw] whitespace-nowrap text-center text-white fixed top-[50%] left-[50%] transform translate-y-[-50%] translate-x-[-50%]"
+      >
+        Prevent Illness <br />
+        Promote Wellness
+      </h1>
+    </div>
+    <div class="bg-red-300 h-[200vh]"></div>
+    <script>
+      const seeMagic = document.getElementById("seeMagic");
+      const magicHeading = document.getElementById("magicHeading");
+      var r = document.querySelector(":root");
+      // Get the styles (properties and values) for the root
+      var rs = getComputedStyle(r);
+
+      window.addEventListener("scroll", () => {
+        const maximumScrollLength = window.innerHeight * 1;
+        const maximumScrollLengthForFading = window.innerHeight * 1.2;
+        const scrolled = window.scrollY;
+        const scrolledPercentage =
+          scrolled < maximumScrollLength
+            ? Math.floor((scrolled / maximumScrollLength) * 100)
+            : 100;
+        // let fadingPercentage = 0.01 * scrolledPercentage;
+        let scalePercentage = 0.15 * scrolledPercentage;
+
+        // console.log(scrolledPercentage, scalePercentage);
+        // seeMagic.style.opacity = fadingPercentages;
+        magicHeading.style.transform = ` translate(-50%,-50%) scale(${
+          scalePercentage > 1 ? scalePercentage : 1
+        })`;
+
+        if (scrolled > maximumScrollLength) {
+          let newScrollPercentage =
+            scrolled < maximumScrollLengthForFading
+              ? Math.floor(
+                  ((scrolled - window.innerHeight) /
+                    (maximumScrollLengthForFading - window.innerHeight)) *
+                    100
+                )
+              : 100;
+          const fadingPercentage = 0.01 / newScrollPercentage;
+          magicHeading.style.opacity = (100 - newScrollPercentage) / 100;
+        } else {
+        }
+      });
+    </script>
+  </body>
+</html>
