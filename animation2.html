@@ -16,9 +16,30 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap"
       rel="stylesheet"
     />
+    <style>
+      header span,
+      header li {
+        transition: all 0.8s;
+      }
+      header.active {
+        color: #fff;
+      }
+    </style>
   </head>
   <body>
     <div id="seeMagic" class="relative min-h-[230vh]">
+      <header
+        class="max-w-[90%] flex items-center justify-between z-[22] sticky top-0 left-0 mx-auto py-[1vw] uppercase"
+      >
+        <span class="text-[2vw] leading-[2vw]">Logo</span>
+        <ul
+          class="text-[1.1vw] leading-[1.1vw] pt-[0.3vw] flex items-center gap-x-[1.5vw]"
+        >
+          <li>Home</li>
+          <li>About</li>
+          <li>Contact</li>
+        </ul>
+      </header>
       <video
         src="./bannerVideo.mp4"
         muted
@@ -73,6 +94,11 @@
           magicHeading.style.opacity = (100 - newScrollPercentage) / 100;
         } else {
           magicHeading.style.opacity = 1;
+        }
+        if (scrolled > maximumScrollLengthForFading) {
+          document.querySelector("header").classList.add("active");
+        } else {
+          document.querySelector("header").classList.remove("active");
         }
       });
     </script>
